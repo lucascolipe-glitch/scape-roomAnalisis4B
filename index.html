@@ -1,0 +1,1025 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Escape Room - Taller de Funciones</title>
+
+  <!-- MathJax para escribir fórmulas matemáticas con LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    :root {
+      --fondo: #0f172a;
+      --panel: #1e293b;
+      --panel-claro: #334155;
+      --texto: #f8fafc;
+      --texto-suave: #cbd5e1;
+      --verde: #22c55e;
+      --rojo: #ef4444;
+      --amarillo: #facc15;
+      --azul: #38bdf8;
+      --borde: #475569;
+      --blanco: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, #1e3a8a 0, transparent 35%),
+        var(--fondo);
+      color: var(--texto);
+      line-height: 1.6;
+    }
+
+    header {
+      min-height: 90vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .portada {
+      width: min(1000px, 95%);
+      background: rgba(15, 23, 42, 0.92);
+      border: 2px solid var(--borde);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    }
+
+    .etiqueta {
+      display: inline-block;
+      padding: .4rem .8rem;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, .15);
+      color: var(--azul);
+      border: 1px solid rgba(56, 189, 248, .4);
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      margin: .5rem 0;
+      line-height: 1.1;
+    }
+
+    h2 {
+      color: var(--azul);
+      margin-top: 0;
+    }
+
+    h3 {
+      color: var(--amarillo);
+      margin-bottom: .4rem;
+    }
+
+    p {
+      color: var(--texto-suave);
+    }
+
+    .boton,
+    button {
+      display: inline-block;
+      border: none;
+      background: var(--azul);
+      color: #082f49;
+      padding: .8rem 1.1rem;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      transition: .2s;
+    }
+
+    .boton:hover,
+    button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .boton-secundario {
+      background: transparent;
+      color: var(--texto);
+      border: 1px solid var(--borde);
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(15, 23, 42, .95);
+      border-bottom: 1px solid var(--borde);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-contenedor {
+      width: min(1200px, 96%);
+      margin: auto;
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: .6rem;
+    }
+
+    nav a {
+      color: var(--texto);
+      text-decoration: none;
+      font-size: .9rem;
+      padding: .45rem .7rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+
+    nav a:hover {
+      border-color: var(--azul);
+      color: var(--azul);
+    }
+
+    main {
+      width: min(1100px, 95%);
+      margin: 0 auto;
+      padding: 2rem 0 5rem;
+    }
+
+    section {
+      margin: 2rem 0;
+      background: rgba(30, 41, 59, .9);
+      border: 1px solid var(--borde);
+      border-radius: 22px;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+    }
+
+    .bloque {
+      background: rgba(51, 65, 85, .65);
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .historia {
+      border-left: 5px solid var(--azul);
+    }
+
+    .consigna {
+      border-left: 5px solid var(--amarillo);
+    }
+
+    .resultado {
+      border-left: 5px solid var(--verde);
+    }
+
+    .candado {
+      background: #020617;
+      border: 2px dashed var(--borde);
+      border-radius: 16px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .candado input {
+      width: 160px;
+      max-width: 100%;
+      padding: .8rem;
+      font-size: 1.2rem;
+      text-align: center;
+      border-radius: 10px;
+      border: 2px solid var(--borde);
+      background: var(--fondo);
+      color: var(--texto);
+      letter-spacing: .15rem;
+      margin-right: .5rem;
+    }
+
+    .mensaje {
+      margin-top: .8rem;
+      font-weight: bold;
+    }
+
+    .ok {
+      color: var(--verde);
+    }
+
+    .error {
+      color: var(--rojo);
+    }
+
+    .palabra {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      text-align: center;
+      border-radius: 14px;
+      background: rgba(34, 197, 94, .15);
+      border: 1px solid rgba(34, 197, 94, .5);
+      color: var(--verde);
+      font-size: 1.7rem;
+      font-weight: bold;
+      letter-spacing: .08rem;
+    }
+
+    .palabra.visible {
+      display: block;
+    }
+
+    .grilla {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .tarjeta {
+      background: rgba(15, 23, 42, .7);
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .formula {
+      font-size: 1.25rem;
+      text-align: center;
+      color: var(--blanco);
+      padding: .5rem;
+    }
+
+    details {
+      margin: 1rem 0;
+      background: rgba(250, 204, 21, .08);
+      border: 1px solid rgba(250, 204, 21, .35);
+      border-radius: 14px;
+      padding: .8rem 1rem;
+    }
+
+    summary {
+      cursor: pointer;
+      color: var(--amarillo);
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--borde);
+      padding: .7rem;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(56, 189, 248, .15);
+      color: var(--azul);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      border-radius: 12px;
+      border: 1px solid var(--borde);
+      background: #020617;
+      color: var(--texto);
+      padding: .8rem;
+      resize: vertical;
+    }
+
+    .progreso {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: .8rem;
+      margin-top: 1rem;
+    }
+
+    .estado {
+      padding: .8rem;
+      border-radius: 14px;
+      text-align: center;
+      border: 1px solid var(--borde);
+      background: rgba(15, 23, 42, .7);
+      color: var(--texto-suave);
+      font-weight: bold;
+    }
+
+    .estado.completo {
+      border-color: var(--verde);
+      color: var(--verde);
+      background: rgba(34, 197, 94, .12);
+    }
+
+    .final {
+      text-align: center;
+      border: 2px solid var(--verde);
+      background:
+        radial-gradient(circle at top, rgba(34, 197, 94, .22), transparent 45%),
+        rgba(30, 41, 59, .95);
+    }
+
+    .codigo-final {
+      font-size: 2.2rem;
+      color: var(--verde);
+      font-weight: bold;
+      letter-spacing: .2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--texto-suave);
+      border-top: 1px solid var(--borde);
+      background: rgba(15, 23, 42, .95);
+    }
+
+    @media print {
+      nav,
+      .boton,
+      button,
+      .candado {
+        display: none;
+      }
+
+      body {
+        background: white;
+        color: black;
+      }
+
+      section,
+      .bloque,
+      .tarjeta {
+        background: white;
+        color: black;
+        box-shadow: none;
+      }
+
+      p {
+        color: black;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header id="inicio">
+  <div class="portada">
+    <span class="etiqueta">Análisis Matemático · EPET 27 · 4.º B Vespertino</span>
+    <h1>Escape Room: El Taller de Funciones</h1>
+
+    <p>
+      El banco de pruebas del taller quedó bloqueado. Para reactivarlo,
+      deberán superar cinco estaciones matemáticas: función lineal,
+      cuadrática, racional, exponencial y logarítmica.
+    </p>
+
+    <p>
+      En cada estación deberán analizar una función, justificar sus respuestas
+      y obtener un código para abrir un candado.
+    </p>
+
+    <a class="boton" href="#reglas">Comenzar misión</a>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-contenedor">
+    <a href="#reglas">Reglas</a>
+    <a href="#estacion1">Lineal</a>
+    <a href="#estacion2">Cuadrática</a>
+    <a href="#estacion3">Racional</a>
+    <a href="#estacion4">Exponencial</a>
+    <a href="#estacion5">Logarítmica</a>
+    <a href="#final">Final</a>
+  </div>
+</nav>
+
+<main>
+
+<section id="reglas">
+  <h2>Reglas del juego</h2>
+
+  <div class="bloque historia">
+    <h3>Situación inicial</h3>
+    <p>
+      El sistema del taller perdió los modelos matemáticos que controlan
+      distintos fenómenos. Para volver a ponerlo en funcionamiento, cada equipo
+      debe recuperar cinco claves.
+    </p>
+  </div>
+
+  <div class="grilla">
+    <div class="tarjeta">
+      <h3>Equipos</h3>
+      <p>Trabajen en grupos de 3 o 4 integrantes.</p>
+    </div>
+
+    <div class="tarjeta">
+      <h3>Objetivo</h3>
+      <p>Analizar completamente cada función y conseguir el código del candado.</p>
+    </div>
+
+    <div class="tarjeta">
+      <h3>Registro</h3>
+      <p>Además del resultado, deben anotar cómo pensaron y justificar sus decisiones.</p>
+    </div>
+  </div>
+
+  <h3>Progreso del equipo</h3>
+
+  <div class="progreso">
+    <div id="estado1" class="estado">Lineal</div>
+    <div id="estado2" class="estado">Cuadrática</div>
+    <div id="estado3" class="estado">Racional</div>
+    <div id="estado4" class="estado">Exponencial</div>
+    <div id="estado5" class="estado">Logarítmica</div>
+  </div>
+
+  <p>
+    Los códigos se escriben sin espacios. Ejemplo: <strong>0206</strong>.
+  </p>
+
+  <button class="boton-secundario" onclick="reiniciarEscape()">Reiniciar progreso</button>
+</section>
+
+<!-- ESTACIÓN 1 -->
+
+<section id="estacion1">
+  <h2>Estación 1 — Función lineal</h2>
+
+  <div class="bloque historia">
+    <h3>Historia</h3>
+    <p>
+      El sensor de avance del banco de pruebas mide una magnitud que cambia de
+      manera constante. El sistema muestra el siguiente modelo:
+    </p>
+
+    <p class="formula">
+      \( f(x)=3x-6 \)
+    </p>
+  </div>
+
+  <div class="bloque consigna">
+    <h3>Consigna</h3>
+    <p>Analicen la función lineal y completen:</p>
+
+    <ul>
+      <li>Dominio.</li>
+      <li>Raíz.</li>
+      <li>Ordenada al origen.</li>
+      <li>Pendiente.</li>
+      <li>Intervalos de positividad y negatividad.</li>
+      <li>Crecimiento o decrecimiento.</li>
+    </ul>
+  </div>
+
+  <details>
+    <summary>Pista</summary>
+    <p>
+      Para encontrar la raíz, buscá cuándo la función vale cero:
+      \(3x-6=0\).
+    </p>
+  </details>
+
+  <div class="bloque">
+    <h3>Registro del grupo</h3>
+    <textarea placeholder="Escriban acá el análisis de la función lineal..."></textarea>
+  </div>
+
+  <div class="candado">
+    <h3>Candado 1</h3>
+    <p>
+      El código se forma con la raíz y el valor absoluto de la ordenada al origen.
+    </p>
+
+    <input id="codigo1" maxlength="4" placeholder="----" />
+    <button onclick="validarCodigo(1, '0206', 'LINEAL')">Validar</button>
+
+    <div id="mensaje1" class="mensaje"></div>
+    <div id="palabra1" class="palabra">LINEAL</div>
+  </div>
+</section>
+
+<!-- ESTACIÓN 2 -->
+
+<section id="estacion2">
+  <h2>Estación 2 — Función cuadrática</h2>
+
+  <div class="bloque historia">
+    <h3>Historia</h3>
+    <p>
+      Una pieza del taller describe una trayectoria parabólica. El sistema
+      registra su altura mediante:
+    </p>
+
+    <p class="formula">
+      \( g(x)=-x^2+6x-8 \)
+    </p>
+  </div>
+
+  <div class="bloque consigna">
+    <h3>Consigna</h3>
+    <p>Analicen la función cuadrática y completen:</p>
+
+    <ul>
+      <li>Dominio.</li>
+      <li>Raíces.</li>
+      <li>Ordenada al origen.</li>
+      <li>Vértice.</li>
+      <li>Eje de simetría.</li>
+      <li>Máximo o mínimo.</li>
+      <li>Intervalos de crecimiento y decrecimiento.</li>
+      <li>Intervalos de positividad y negatividad.</li>
+    </ul>
+  </div>
+
+  <details>
+    <summary>Pista</summary>
+    <p>
+      Conviene factorizar:
+      \[
+      -x^2+6x-8=-(x-2)(x-4).
+      \]
+    </p>
+  </details>
+
+  <div class="bloque">
+    <h3>Registro del grupo</h3>
+    <textarea placeholder="Escriban acá el análisis de la función cuadrática..."></textarea>
+  </div>
+
+  <div class="candado">
+    <h3>Candado 2</h3>
+    <p>
+      El código se forma con las raíces y las coordenadas del vértice.
+    </p>
+
+    <input id="codigo2" maxlength="4" placeholder="----" />
+    <button onclick="validarCodigo(2, '2431', 'CUADRÁTICA')">Validar</button>
+
+    <div id="mensaje2" class="mensaje"></div>
+    <div id="palabra2" class="palabra">CUADRÁTICA</div>
+  </div>
+</section>
+
+<!-- ESTACIÓN 3 -->
+
+<section id="estacion3">
+  <h2>Estación 3 — Función racional</h2>
+
+  <div class="bloque historia">
+    <h3>Historia</h3>
+    <p>
+      El sistema de presión del taller no se comporta de manera lineal. El
+      modelo que aparece en pantalla es:
+    </p>
+
+    <p class="formula">
+      \( h(x)=\frac{2x-4}{x-1} \)
+    </p>
+  </div>
+
+  <div class="bloque consigna">
+    <h3>Consigna</h3>
+    <p>Analicen la función racional y completen:</p>
+
+    <ul>
+      <li>Dominio.</li>
+      <li>Raíz.</li>
+      <li>Ordenada al origen.</li>
+      <li>Asíntota vertical.</li>
+      <li>Asíntota horizontal.</li>
+      <li>Intervalos de positividad y negatividad.</li>
+      <li>Crecimiento o decrecimiento.</li>
+      <li>Comportamiento cerca de la asíntota vertical.</li>
+    </ul>
+  </div>
+
+  <details>
+    <summary>Pista</summary>
+    <p>
+      El denominador indica dónde la función no existe.
+      Además:
+      \[
+      h(x)=2-\frac{2}{x-1}.
+      \]
+    </p>
+  </details>
+
+  <div class="bloque">
+    <h3>Registro del grupo</h3>
+    <textarea placeholder="Escriban acá el análisis de la función racional..."></textarea>
+  </div>
+
+  <div class="candado">
+    <h3>Candado 3</h3>
+    <p>
+      El código se forma con: raíz, asíntota vertical, asíntota horizontal
+      y ordenada al origen.
+    </p>
+
+    <input id="codigo3" maxlength="4" placeholder="----" />
+    <button onclick="validarCodigo(3, '2124', 'RACIONAL')">Validar</button>
+
+    <div id="mensaje3" class="mensaje"></div>
+    <div id="palabra3" class="palabra">RACIONAL</div>
+  </div>
+</section>
+
+<!-- ESTACIÓN 4 -->
+
+<section id="estacion4">
+  <h2>Estación 4 — Función exponencial</h2>
+
+  <div class="bloque historia">
+    <h3>Historia</h3>
+    <p>
+      Una señal eléctrica del banco de pruebas crece rápidamente. El sistema la
+      modela con:
+    </p>
+
+    <p class="formula">
+      \( p(x)=2^x-4 \)
+    </p>
+  </div>
+
+  <div class="bloque consigna">
+    <h3>Consigna</h3>
+    <p>Analicen la función exponencial y completen:</p>
+
+    <ul>
+      <li>Dominio.</li>
+      <li>Imagen.</li>
+      <li>Raíz.</li>
+      <li>Ordenada al origen.</li>
+      <li>Asíntota horizontal.</li>
+      <li>Intervalos de positividad y negatividad.</li>
+      <li>Crecimiento o decrecimiento.</li>
+      <li>Relación entre fórmula y gráfico.</li>
+    </ul>
+  </div>
+
+  <details>
+    <summary>Pista</summary>
+    <p>
+      Para hallar la raíz:
+      \[
+      2^x-4=0.
+      \]
+      Recordá que \(4=2^2\).
+    </p>
+  </details>
+
+  <div class="bloque">
+    <h3>Registro del grupo</h3>
+    <textarea placeholder="Escriban acá el análisis de la función exponencial..."></textarea>
+  </div>
+
+  <div class="candado">
+    <h3>Candado 4</h3>
+    <p>
+      El código se forma con la raíz y el valor absoluto de la asíntota horizontal.
+    </p>
+
+    <input id="codigo4" maxlength="4" placeholder="----" />
+    <button onclick="validarCodigo(4, '0204', 'EXPONENCIAL')">Validar</button>
+
+    <div id="mensaje4" class="mensaje"></div>
+    <div id="palabra4" class="palabra">EXPONENCIAL</div>
+  </div>
+</section>
+
+<!-- ESTACIÓN 5 -->
+
+<section id="estacion5">
+  <h2>Estación 5 — Función logarítmica</h2>
+
+  <div class="bloque historia">
+    <h3>Historia</h3>
+    <p>
+      El último módulo del banco de pruebas usa una escala logarítmica. La
+      pantalla muestra:
+    </p>
+
+    <p class="formula">
+      \( q(x)=\log_3(x-2) \)
+    </p>
+  </div>
+
+  <div class="bloque consigna">
+    <h3>Consigna</h3>
+    <p>Analicen la función logarítmica y completen:</p>
+
+    <ul>
+      <li>Dominio.</li>
+      <li>Imagen.</li>
+      <li>Raíz.</li>
+      <li>Ordenada al origen, si existe.</li>
+      <li>Asíntota vertical.</li>
+      <li>Intervalos de positividad y negatividad.</li>
+      <li>Crecimiento o decrecimiento.</li>
+      <li>Relación con la función exponencial.</li>
+    </ul>
+  </div>
+
+  <details>
+    <summary>Pista</summary>
+    <p>
+      Para que exista el logaritmo, lo que está adentro debe ser positivo:
+      \[
+      x-2>0.
+      \]
+    </p>
+  </details>
+
+  <div class="bloque">
+    <h3>Registro del grupo</h3>
+    <textarea placeholder="Escriban acá el análisis de la función logarítmica..."></textarea>
+  </div>
+
+  <div class="candado">
+    <h3>Candado 5</h3>
+    <p>
+      El código se forma con: asíntota vertical, raíz, base del logaritmo
+      y un cero porque no tiene ordenada al origen.
+    </p>
+
+    <input id="codigo5" maxlength="4" placeholder="----" />
+    <button onclick="validarCodigo(5, '2330', 'LOGARÍTMICA')">Validar</button>
+
+    <div id="mensaje5" class="mensaje"></div>
+    <div id="palabra5" class="palabra">LOGARÍTMICA</div>
+  </div>
+</section>
+
+<!-- FINAL -->
+
+<section id="final" class="final">
+  <h2>Desbloqueo final</h2>
+
+  <p>
+    Para abrir el cofre final, el equipo debe haber recuperado las cinco palabras:
+  </p>
+
+  <div class="grilla">
+    <div class="tarjeta"><strong>LINEAL</strong></div>
+    <div class="tarjeta"><strong>CUADRÁTICA</strong></div>
+    <div class="tarjeta"><strong>RACIONAL</strong></div>
+    <div class="tarjeta"><strong>EXPONENCIAL</strong></div>
+    <div class="tarjeta"><strong>LOGARÍTMICA</strong></div>
+  </div>
+
+  <div class="bloque">
+    <h3>Pregunta final</h3>
+    <p>
+      ¿Qué tuvieron que hacer en todas las estaciones?
+    </p>
+
+    <table>
+      <tr>
+        <th>Opción</th>
+        <th>Respuesta</th>
+      </tr>
+      <tr>
+        <td>A</td>
+        <td>Solo reemplazar valores.</td>
+      </tr>
+      <tr>
+        <td>B</td>
+        <td>Mirar si la función tenía letras.</td>
+      </tr>
+      <tr>
+        <td>C</td>
+        <td>Analizar dominio, raíces, signos, crecimiento y comportamiento gráfico.</td>
+      </tr>
+      <tr>
+        <td>D</td>
+        <td>Copiar fórmulas.</td>
+      </tr>
+    </table>
+
+    <p>
+      Cuando el grupo acuerde la respuesta correcta, ingrese la letra.
+    </p>
+
+    <input id="respuestaFinal" maxlength="1" placeholder="A/B/C/D" />
+    <button onclick="validarFinal()">Validar respuesta final</button>
+
+    <div id="mensajeFinal" class="mensaje"></div>
+  </div>
+
+  <div id="cofreFinal" style="display:none;">
+    <h3>Sistema reactivado</h3>
+
+    <p>
+      El grupo logró analizar funciones lineales, cuadráticas, racionales,
+      exponenciales y logarítmicas, reconociendo dominio, raíces, signos,
+      crecimiento, decrecimiento y asíntotas.
+    </p>
+
+    <p>El código del cofre final es:</p>
+
+    <p class="codigo-final">6823</p>
+  </div>
+</section>
+
+<section id="docente">
+  <h2>Resumen docente</h2>
+
+  <p>
+    Esta tabla sirve para preparar los candados físicos y controlar rápidamente
+    los códigos de cada estación.
+  </p>
+
+  <table>
+    <tr>
+      <th>Estación</th>
+      <th>Tema</th>
+      <th>Función</th>
+      <th>Código</th>
+      <th>Palabra</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Lineal</td>
+      <td>\(f(x)=3x-6\)</td>
+      <td>0206</td>
+      <td>LINEAL</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Cuadrática</td>
+      <td>\(g(x)=-x^2+6x-8\)</td>
+      <td>2431</td>
+      <td>CUADRÁTICA</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Racional</td>
+      <td>\(h(x)=\frac{2x-4}{x-1}\)</td>
+      <td>2124</td>
+      <td>RACIONAL</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Exponencial</td>
+      <td>\(p(x)=2^x-4\)</td>
+      <td>0204</td>
+      <td>EXPONENCIAL</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Logarítmica</td>
+      <td>\(q(x)=\log_3(x-2)\)</td>
+      <td>2330</td>
+      <td>LOGARÍTMICA</td>
+    </tr>
+    <tr>
+      <td>Final</td>
+      <td>Integración</td>
+      <td>Todas</td>
+      <td>6823</td>
+      <td>Sistema reactivado</td>
+    </tr>
+  </table>
+</section>
+
+</main>
+
+<footer>
+  <p>
+    Escape Room: El Taller de Funciones · Análisis Matemático · 4.º B Vespertino
+  </p>
+</footer>
+
+<script>
+  /*
+    Escape Room - Taller de Funciones
+    Códigos:
+    Estación 1: 0206
+    Estación 2: 2431
+    Estación 3: 2124
+    Estación 4: 0204
+    Estación 5: 2330
+    Final: 6823
+  */
+
+  const totalEstaciones = 5;
+
+  function validarCodigo(numero, codigoCorrecto, palabra) {
+    const input = document.getElementById("codigo" + numero);
+    const mensaje = document.getElementById("mensaje" + numero);
+    const palabraElemento = document.getElementById("palabra" + numero);
+
+    const codigoIngresado = input.value.trim();
+
+    if (codigoIngresado === codigoCorrecto) {
+      mensaje.textContent = "Código correcto. Candado desbloqueado.";
+      mensaje.className = "mensaje ok";
+
+      palabraElemento.textContent = palabra;
+      palabraElemento.classList.add("visible");
+
+      localStorage.setItem("estacion" + numero, "completa");
+
+      actualizarProgreso();
+
+      if (window.MathJax) {
+        MathJax.typesetPromise();
+      }
+    } else {
+      mensaje.textContent = "Código incorrecto. Revisen el análisis de la función.";
+      mensaje.className = "mensaje error";
+    }
+  }
+
+  function actualizarProgreso() {
+    for (let i = 1; i <= totalEstaciones; i++) {
+      const estado = document.getElementById("estado" + i);
+      const palabra = document.getElementById("palabra" + i);
+
+      if (localStorage.getItem("estacion" + i) === "completa") {
+        if (estado) {
+          estado.classList.add("completo");
+          estado.textContent = estado.textContent + " ✓";
+        }
+
+        if (palabra) {
+          palabra.classList.add("visible");
+        }
+      }
+    }
+  }
+
+  function validarFinal() {
+    const respuesta = document.getElementById("respuestaFinal").value.trim().toUpperCase();
+    const mensaje = document.getElementById("mensajeFinal");
+    const cofre = document.getElementById("cofreFinal");
+
+    let estacionesCompletas = true;
+
+    for (let i = 1; i <= totalEstaciones; i++) {
+      if (localStorage.getItem("estacion" + i) !== "completa") {
+        estacionesCompletas = false;
+      }
+    }
+
+    if (!estacionesCompletas) {
+      mensaje.textContent = "Todavía falta desbloquear alguna estación.";
+      mensaje.className = "mensaje error";
+      return;
+    }
+
+    if (respuesta === "C") {
+      mensaje.textContent = "Respuesta correcta. Cofre final habilitado."; 
+      mensaje.className = "mensaje ok";
+      cofre.style.display = "block";
+    } else {
+      mensaje.textContent = "Revisen la pregunta final. No se trata solo de hacer cuentas.";
+      mensaje.className = "mensaje error";
+      cofre.style.display = "none";
+    }
+  }
+
+  function reiniciarEscape() {
+    const confirmar = confirm("¿Querés reiniciar el progreso del escape room?");
+
+    if (confirmar) {
+      for (let i = 1; i <= totalEstaciones; i++) {
+        localStorage.removeItem("estacion" + i);
+      }
+
+      location.reload();
+    }
+  }
+
+  window.addEventListener("load", actualizarProgreso);
+</script>
+
+</body>
+</html>
