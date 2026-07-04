@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estación 3 - Función racional</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script defer src="js/escape.js"></script>
+</head>
+<body onload="initEscape('estacion3')">
+<header class="barra-superior">
+  <nav class="nav-contenedor">
+    <a class="marca" href="index.html"><span class="logo-mini">3</span><span>Función racional</span></a>
+    <div class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="estacion1.html">E1</a>
+      <a href="estacion2.html">E2</a>
+      <a class="activo" href="estacion3.html">E3</a>
+      <a href="estacion4.html">E4</a>
+      <a href="estacion5.html">E5</a>
+      <a href="final.html">Final</a>
+      <span class="timer" data-timer>00:00</span>
+    </div>
+  </nav>
+</header>
+
+<main class="contenedor">
+  <section class="estacion-cabecera">
+    <div class="etiqueta">Estación 3</div>
+    <h1>Sistema de presión</h1>
+    <p>El sistema se vuelve inestable cerca de un valor prohibido.</p>
+    <div class="progreso" data-progress></div>
+  </section>
+
+  <section class="grid-dos">
+    <article class="tarjeta">
+      <h2>Modelo racional</h2>
+      <div class="formula">\[ h(x)=\frac{2x-4}{x-1} \]</div>
+      <p>Realicen el análisis completo.</p>
+      <ol class="lista-analisis">
+        <li>Dominio.</li>
+        <li>Raíz.</li>
+        <li>Ordenada al origen.</li>
+        <li>Asíntota vertical.</li>
+        <li>Asíntota horizontal.</li>
+        <li>Signo de la función.</li>
+        <li>Crecimiento o decrecimiento en cada intervalo del dominio.</li>
+      </ol>
+    </article>
+
+    <article class="tarjeta">
+      <h2>Obtener el código</h2>
+      <p>El código se forma con:</p>
+      <ul>
+        <li>raíz;</li>
+        <li>asíntota vertical;</li>
+        <li>asíntota horizontal;</li>
+        <li>ordenada al origen.</li>
+      </ul>
+      <div class="campo">
+        <label for="codigo">Código de la estación</label>
+        <input id="codigo" type="text" inputmode="numeric" placeholder="Ejemplo: 0000" />
+      </div>
+      <div class="botones">
+        <button class="boton" onclick="validateStation('estacion3')">Validar código</button>
+        <button class="boton secundario" onclick="toggleHint('pista3')">Ver pista</button>
+      </div>
+      <div id="pista3" class="pista">El denominador indica dónde la función no existe. Si numerador y denominador tienen el mismo grado, la asíntota horizontal se obtiene con el cociente de coeficientes principales.</div>
+      <div id="resultado" class="mensaje"></div>
+    </article>
+  </section>
+</main>
+<footer class="footer">Estación 3 - archivo estacion3.html</footer>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía docente - Escape Room</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script defer src="js/escape.js"></script>
+</head>
+<body onload="initEscape('docente')">
+<header class="barra-superior">
+  <nav class="nav-contenedor">
+    <a class="marca" href="index.html"><span class="logo-mini">D</span><span>Guía docente</span></a>
+    <div class="menu">
+      <a href="index.html">Inicio</a>
+      <button onclick="resetEscape()">Reiniciar</button>
+      <span class="timer" data-timer>00:00</span>
+    </div>
+  </nav>
+</header>
+
+<main class="contenedor">
+  <section class="hero">
+    <div class="etiqueta">Solo para el docente</div>
+    <h1>Respuestas, códigos y orientaciones</h1>
+    <p>Esta página no tiene seguridad real porque GitHub Pages es estático. La clave solo evita que aparezca todo de entrada.</p>
+  </section>
+
+  <section class="tarjeta">
+    <h2>Ingresar</h2>
+    <p>Clave docente: <strong>FUNCIONES</strong></p>
+    <div class="campo">
+      <label for="claveDocente">Clave</label>
+      <input id="claveDocente" type="password" placeholder="Escribí la clave" />
+    </div>
+    <button class="boton" onclick="teacherLogin()">Mostrar guía</button>
+    <p id="mensajeDocente" style="color:#dc2626;font-weight:700;"></p>
+  </section>
+
+  <section id="panelDocente" class="oculto">
+    <div class="progreso" data-progress></div>
+
+    <article class="tarjeta" style="margin-top:1rem;">
+      <h2>Tabla rápida de códigos</h2>
+      <table>
+        <tr><th>Estación</th><th>Función</th><th>Código</th><th>Palabra</th></tr>
+        <tr><td>1 - Lineal</td><td>\(f(x)=3x-6\)</td><td><span class="codigo">0206</span></td><td>LINEAL</td></tr>
+        <tr><td>2 - Cuadrática</td><td>\(g(x)=-x^2+6x-8\)</td><td><span class="codigo">2431</span></td><td>CUADRÁTICA</td></tr>
+        <tr><td>3 - Racional</td><td>\(h(x)=\frac{2x-4}{x-1}\)</td><td><span class="codigo">2124</span></td><td>RACIONAL</td></tr>
+        <tr><td>4 - Exponencial</td><td>\(p(x)=2^x-4\)</td><td><span class="codigo">0204</span></td><td>EXPONENCIAL</td></tr>
+        <tr><td>5 - Logarítmica</td><td>\(q(x)=\log_3(x-2)\)</td><td><span class="codigo">2330</span></td><td>LOGARÍTMICA</td></tr>
+        <tr><td>Final</td><td>Integración</td><td><span class="codigo">6823</span></td><td>Sistema reactivado</td></tr>
+      </table>
+      <button class="boton verde" onclick="unlockAll()">Marcar todo como completo</button>
+      <div id="docenteOk" class="mensaje"></div>
+    </article>
+
+    <article class="tarjeta" style="margin-top:1rem;">
+      <h2>Respuestas esperadas</h2>
+      <h3>Estación 1 - Lineal</h3>
+      <p>Dominio: \(\mathbb{R}\). Raíz: \(x=2\). Ordenada: \(f(0)=-6\). Pendiente: \(m=3\). Creciente en todo \(\mathbb{R}\). Positiva si \(x>2\), negativa si \(x<2\).</p>
+
+      <h3>Estación 2 - Cuadrática</h3>
+      <p>\(g(x)=-(x-2)(x-4)\). Raíces: 2 y 4. Ordenada: -8. Vértice: \((3,1)\). Eje: \(x=3\). Máximo: 1. Crece en \((−\infty,3)\), decrece en \((3,+\infty)\). Positiva en \((2,4)\).</p>
+
+      <h3>Estación 3 - Racional</h3>
+      <p>Dominio: \(\mathbb{R}-\{1\}\). Raíz: 2. Ordenada: 4. Asíntota vertical: \(x=1\). Asíntota horizontal: \(y=2\). Positiva en \((−\infty,1)\cup(2,+\infty)\), negativa en \((1,2)\). Creciente en cada intervalo del dominio.</p>
+
+      <h3>Estación 4 - Exponencial</h3>
+      <p>Dominio: \(\mathbb{R}\). Imagen: \((-4,+\infty)\). Raíz: 2. Ordenada: -3. Asíntota horizontal: \(y=-4\). Creciente. Positiva si \(x>2\), negativa si \(x<2\).</p>
+
+      <h3>Estación 5 - Logarítmica</h3>
+      <p>Dominio: \((2,+\infty)\). Imagen: \(\mathbb{R}\). Raíz: 3. No tiene ordenada al origen. Asíntota vertical: \(x=2\). Creciente. Positiva si \(x>3\), negativa si \(2<x<3\).</p>
+    </article>
+
+    <article class="tarjeta" style="margin-top:1rem;">
+      <h2>Sugerencia de uso</h2>
+      <ul>
+        <li>Duración: 80 a 100 minutos.</li>
+        <li>Equipos de 3 o 4 integrantes.</li>
+        <li>Antes de abrir cada caja, pedir al grupo una justificación breve.</li>
+        <li>La hoja de registro se puede usar como evidencia de trabajo.</li>
+        <li>El cierre puede centrarse en la diferencia entre calcular datos aislados y analizar una función completa.</li>
+      </ul>
+    </article>
+  </section>
+</main>
+<footer class="footer">Guía docente - archivo docente.html</footer>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Final - Escape Room de funciones</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+  <script defer src="js/escape.js"></script>
+</head>
+<body onload="initEscape('final')">
+<header class="barra-superior">
+  <nav class="nav-contenedor">
+    <a class="marca" href="index.html"><span class="logo-mini">✓</span><span>Desbloqueo final</span></a>
+    <div class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="estacion1.html">E1</a>
+      <a href="estacion2.html">E2</a>
+      <a href="estacion3.html">E3</a>
+      <a href="estacion4.html">E4</a>
+      <a href="estacion5.html">E5</a>
+      <a class="activo" href="final.html">Final</a>
+      <span class="timer" data-timer>00:00</span>
+    </div>
+  </nav>
+</header>
+
+<main class="contenedor">
+  <section class="estacion-cabecera">
+    <div class="etiqueta">Cofre final</div>
+    <h1>Reactivar el banco de pruebas</h1>
+    <p>Para abrir el cofre final, usen lo que recuperaron durante el recorrido.</p>
+    <div class="progreso" data-progress></div>
+  </section>
+
+  <section class="grid-dos">
+    <article class="tarjeta">
+      <h2>Palabras recuperadas</h2>
+      <table>
+        <tr><th>Estación</th><th>Palabra</th></tr>
+        <tr><td>1</td><td>LINEAL</td></tr>
+        <tr><td>2</td><td>CUADRÁTICA</td></tr>
+        <tr><td>3</td><td>RACIONAL</td></tr>
+        <tr><td>4</td><td>EXPONENCIAL</td></tr>
+        <tr><td>5</td><td>LOGARÍTMICA</td></tr>
+      </table>
+      <div class="tarjeta-suave">
+        <h3>Pregunta final</h3>
+        <p>¿Qué tuvieron que hacer en todas las estaciones?</p>
+        <p><strong>A.</strong> Solo reemplazar valores.</p>
+        <p><strong>B.</strong> Mirar si la función tenía letras.</p>
+        <p><strong>C.</strong> Analizar dominio, raíces, signos, crecimiento y comportamiento gráfico.</p>
+        <p><strong>D.</strong> Copiar fórmulas.</p>
+      </div>
+    </article>
+
+    <article class="tarjeta">
+      <h2>Código final</h2>
+      <p>El código se forma con:</p>
+      <ul>
+        <li>cantidad de letras de LINEAL;</li>
+        <li>cantidad de letras de RACIONAL;</li>
+        <li>cantidad de raíces de la cuadrática;</li>
+        <li>cantidad de asíntotas trabajadas en racional y logarítmica.</li>
+      </ul>
+      <div class="campo">
+        <label for="codigo">Código del cofre</label>
+        <input id="codigo" type="text" inputmode="numeric" placeholder="Ejemplo: 0000" />
+      </div>
+      <div class="botones">
+        <button class="boton verde" onclick="validateFinal()">Abrir cofre</button>
+        <button class="boton secundario" onclick="toggleHint('pistaFinal')">Ver pista</button>
+      </div>
+      <div id="pistaFinal" class="pista">La cuadrática de la estación 2 corta al eje \(x\) en dos puntos. En racional aparece una asíntota vertical y una horizontal; en logarítmica aparece una asíntota vertical.</div>
+      <div id="resultado" class="mensaje"></div>
+    </article>
+  </section>
+
+  <section class="tarjeta" style="margin-top:1rem;">
+    <h2>Puesta en común</h2>
+    <ol>
+      <li>¿Qué estación les resultó más sencilla? ¿Por qué?</li>
+      <li>¿Qué estación exigió más cuidado con el dominio?</li>
+      <li>¿Qué diferencias aparecen entre raíces, ordenada al origen y asíntotas?</li>
+      <li>¿Qué significa analizar completamente una función?</li>
+    </ol>
+  </section>
+</main>
+<footer class="footer">Final - archivo final.html</footer>
+</body>
+</html>

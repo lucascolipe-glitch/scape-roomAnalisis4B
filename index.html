@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escape Room - El Taller de Funciones</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+  <script defer src="js/escape.js"></script>
+</head>
+<body onload="initEscape('index')">
+  <header class="barra-superior">
+    <nav class="nav-contenedor">
+      <a class="marca" href="index.html"><span class="logo-mini">∑</span><span>Escape Room 4.º B</span></a>
+      <div class="menu">
+        <a class="activo" href="index.html">Inicio</a>
+        <a href="estacion1.html">Estación 1</a>
+        <a href="final.html">Final</a>
+        <a href="docente.html">Docente</a>
+        <button onclick="resetEscape()">Reiniciar</button>
+        <span class="timer" data-timer>00:00</span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="contenedor">
+    <section class="hero">
+      <div class="etiqueta">Análisis Matemático - 4.º B Vespertino</div>
+      <h1>El Taller de Funciones</h1>
+      <p>
+        El banco de pruebas del taller quedó bloqueado. Para reactivarlo tendrán que recuperar cinco modelos matemáticos:
+        función lineal, cuadrática, racional, exponencial y logarítmica.
+      </p>
+      <div class="progreso" data-progress></div>
+    </section>
+
+    <section class="grid-dos">
+      <article class="tarjeta tarjeta-oscura">
+        <div class="candado">🔒</div>
+        <h2>Sistema bloqueado</h2>
+        <p>
+          Cada estación propone una función. Para avanzar no alcanza con reemplazar valores: hay que hacer un análisis completo,
+          justificar las decisiones y obtener un código para abrir el candado físico.
+        </p>
+        <p>
+          En cada caja encontrarán una palabra. Al final, esas palabras ayudan a reactivar el sistema.
+        </p>
+        <p><a class="boton verde" href="estacion1.html">Comenzar estación 1</a></p>
+      </article>
+
+      <article class="tarjeta">
+        <h2>Reglas de juego</h2>
+        <ul>
+          <li>Trabajen en grupos de 3 o 4 integrantes.</li>
+          <li>Registren dominio, raíces, ordenada al origen, signo, crecimiento y asíntotas cuando corresponda.</li>
+          <li>El código digital debe coincidir con el candado físico.</li>
+          <li>Las pistas ayudan, pero primero intenten resolver con el grupo.</li>
+          <li>El docente puede pedir una justificación antes de abrir una caja.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid" style="margin-top:1rem;">
+      <article class="tarjeta">
+        <h3>Estación 1</h3>
+        <p>Función lineal.</p>
+      </article>
+      <article class="tarjeta">
+        <h3>Estación 2</h3>
+        <p>Función cuadrática.</p>
+      </article>
+      <article class="tarjeta">
+        <h3>Estación 3</h3>
+        <p>Función racional.</p>
+      </article>
+      <article class="tarjeta">
+        <h3>Estación 4</h3>
+        <p>Función exponencial.</p>
+      </article>
+      <article class="tarjeta">
+        <h3>Estación 5</h3>
+        <p>Función logarítmica.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">Escape Room - Análisis Matemático. Archivo inicial: index.html</footer>
+</body>
+</html>

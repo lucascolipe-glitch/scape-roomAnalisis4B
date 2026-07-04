@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estación 4 - Función exponencial</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script defer src="js/escape.js"></script>
+</head>
+<body onload="initEscape('estacion4')">
+<header class="barra-superior">
+  <nav class="nav-contenedor">
+    <a class="marca" href="index.html"><span class="logo-mini">4</span><span>Función exponencial</span></a>
+    <div class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="estacion1.html">E1</a>
+      <a href="estacion2.html">E2</a>
+      <a href="estacion3.html">E3</a>
+      <a class="activo" href="estacion4.html">E4</a>
+      <a href="estacion5.html">E5</a>
+      <a href="final.html">Final</a>
+      <span class="timer" data-timer>00:00</span>
+    </div>
+  </nav>
+</header>
+
+<main class="contenedor">
+  <section class="estacion-cabecera">
+    <div class="etiqueta">Estación 4</div>
+    <h1>Señal eléctrica</h1>
+    <p>Una señal crece rápidamente y se acerca a un nivel mínimo.</p>
+    <div class="progreso" data-progress></div>
+  </section>
+
+  <section class="grid-dos">
+    <article class="tarjeta">
+      <h2>Modelo exponencial</h2>
+      <div class="formula">\[ p(x)=2^x-4 \]</div>
+      <p>Realicen el análisis completo.</p>
+      <ol class="lista-analisis">
+        <li>Dominio.</li>
+        <li>Imagen.</li>
+        <li>Raíz.</li>
+        <li>Ordenada al origen.</li>
+        <li>Asíntota horizontal.</li>
+        <li>Crecimiento o decrecimiento.</li>
+        <li>Positividad y negatividad.</li>
+      </ol>
+    </article>
+
+    <article class="tarjeta">
+      <h2>Obtener el código</h2>
+      <p>El código se forma con:</p>
+      <ul>
+        <li>dos cifras para la raíz;</li>
+        <li>dos cifras para el valor absoluto de la asíntota horizontal.</li>
+      </ul>
+      <div class="campo">
+        <label for="codigo">Código de la estación</label>
+        <input id="codigo" type="text" inputmode="numeric" placeholder="Ejemplo: 0000" />
+      </div>
+      <div class="botones">
+        <button class="boton" onclick="validateStation('estacion4')">Validar código</button>
+        <button class="boton secundario" onclick="toggleHint('pista4')">Ver pista</button>
+      </div>
+      <div id="pista4" class="pista">Para encontrar la raíz, igualen a cero: \(2^x-4=0\). Recuerden que \(4=2^2\).</div>
+      <div id="resultado" class="mensaje"></div>
+    </article>
+  </section>
+</main>
+<footer class="footer">Estación 4 - archivo estacion4.html</footer>
+</body>
+</html>

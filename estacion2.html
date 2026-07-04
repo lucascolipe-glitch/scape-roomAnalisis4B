@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estación 2 - Función cuadrática</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script defer src="js/escape.js"></script>
+</head>
+<body onload="initEscape('estacion2')">
+<header class="barra-superior">
+  <nav class="nav-contenedor">
+    <a class="marca" href="index.html"><span class="logo-mini">2</span><span>Función cuadrática</span></a>
+    <div class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="estacion1.html">E1</a>
+      <a class="activo" href="estacion2.html">E2</a>
+      <a href="estacion3.html">E3</a>
+      <a href="estacion4.html">E4</a>
+      <a href="estacion5.html">E5</a>
+      <a href="final.html">Final</a>
+      <span class="timer" data-timer>00:00</span>
+    </div>
+  </nav>
+</header>
+
+<main class="contenedor">
+  <section class="estacion-cabecera">
+    <div class="etiqueta">Estación 2</div>
+    <h1>Trayectoria parabólica</h1>
+    <p>Una pieza describe una trayectoria con altura máxima.</p>
+    <div class="progreso" data-progress></div>
+  </section>
+
+  <section class="grid-dos">
+    <article class="tarjeta">
+      <h2>Modelo cuadrático</h2>
+      <div class="formula">\[ g(x)=-x^2+6x-8 \]</div>
+      <p>Realicen el análisis completo.</p>
+      <ol class="lista-analisis">
+        <li>Dominio.</li>
+        <li>Raíces.</li>
+        <li>Ordenada al origen.</li>
+        <li>Vértice y eje de simetría.</li>
+        <li>Máximo o mínimo.</li>
+        <li>Crecimiento y decrecimiento.</li>
+        <li>Positividad y negatividad.</li>
+      </ol>
+    </article>
+
+    <article class="tarjeta">
+      <h2>Obtener el código</h2>
+      <p>El código se forma con:</p>
+      <ul>
+        <li>primera raíz;</li>
+        <li>segunda raíz;</li>
+        <li>coordenada \(x\) del vértice;</li>
+        <li>coordenada \(y\) del vértice.</li>
+      </ul>
+      <div class="campo">
+        <label for="codigo">Código de la estación</label>
+        <input id="codigo" type="text" inputmode="numeric" placeholder="Ejemplo: 0000" />
+      </div>
+      <div class="botones">
+        <button class="boton" onclick="validateStation('estacion2')">Validar código</button>
+        <button class="boton secundario" onclick="toggleHint('pista2')">Ver pista</button>
+      </div>
+      <div id="pista2" class="pista">Conviene factorizar: \(-x^2+6x-8=-(x-2)(x-4)\). Para el vértice usen \(x_v=-\frac{b}{2a}\).</div>
+      <div id="resultado" class="mensaje"></div>
+    </article>
+  </section>
+</main>
+<footer class="footer">Estación 2 - archivo estacion2.html</footer>
+</body>
+</html>
